@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="com.drivetime.publicmobile" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>DriveTime Mobile</name>
+    <description>
+        A sample Apache Cordova application that responds to the deviceready event.
+    </description>
+    <author email="dev@drivetime.com" href="http://www.drivetime.com">
+        Apache Cordova Team
+    </author>
+    <content src="https://mobile.drivetime.com" />
+    <access origin="*" />
+    <allow-navigation href="*" />
+    <allow-navigation href="http://*/*" />
+    <allow-navigation href="https://*/*" />
+    <allow-navigation href="tel:*" />
+    <allow-navigation href="sms:*" />
+    <allow-navigation href="mailto:*" />
+    <allow-navigation href="geo:*" />
+    <allow-intent href="http://*/*" />
+    <allow-intent href="https://*/*" />
+    <allow-intent href="tel:*" />
+    <allow-intent href="sms:*" />
+    <allow-intent href="mailto:*" />
+    <allow-intent href="geo:*" />
+    <platform name="android">
+        <allow-intent href="market:*" />
+    </platform>
+    <platform name="ios">
+        <allow-intent href="itms:*" />
+        <allow-intent href="itms-apps:*" />
+    </platform>
+    <engine name="android" spec="6.4.0" />
+    <engine name="ios" spec="^4.5.4" />
+    <plugin name="cordova-plugin-whitelist" spec="^1.3.3" />
+</widget>

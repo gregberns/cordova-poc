@@ -1,0 +1,31 @@
+{
+  "name": "CordovaPOC",
+  "displayName": "CordovaPOC",
+  "version": "1.0.0",
+  "description": "A simple example of a Cordova App for Andorid and iOS.",
+  "main": "index.js",
+  "scripts": {
+    "build:prepare": "cordova prepare",
+    "build:android": "cordova build android --verbose",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Greg Berns",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "cordova-android": "6.4.0",
+    "cordova-ios": "^4.5.4",
+    "cordova-plugin-whitelist": "^1.3.3"
+  },
+  "cordova": {
+    "plugins": {
+      "cordova-plugin-whitelist": {}
+    },
+    "platforms": [
+      "android",
+      "ios"
+    ]
+  },
+  "devDependencies": {
+    "cordova": "^7.1.0"
+  }
+}

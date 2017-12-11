@@ -1,0 +1,70 @@
+machine:
+  environment:
+    XCODE_SCHEME: "platforms/ios/cordovapoc.xcworkspace"
+
+    P12_PASSWORD: "drivetime1!"
+
+    # used by fastlane
+    # https://github.com/bamlab/fastlane-plugin-cordova
+    CORDOVA_RELEASE: true
+    CORDOVA_DEVICE: true
+    CORDOVA_BUILD_NUMBER: "123"
+    CORDOVA_PREPARE: true
+
+    CORDOVA_IOS_TEAM_ID: "KT6CTR8UUW"
+    CORDOVA_IOS_PROVISIONING_PROFILE: "595b7c7d-f3fc-4c84-940e-f4eb45ac5d8f"
+    CORDOVA_IOS_RELEASE_BUILD_PATH: "platforms/ios/build/device/Cordova-Poc.ipa"
+    # CORDOVA_IOS_TEAM_ID="KT6CTR8UUW"
+    # CORDOVA_IOS_PROVISIONING_PROFILE="595b7c7d-f3fc-4c84-940e-f4eb45ac5d8f"
+    # CORDOVA_IOS_RELEASE_BUILD_PATH="platforms/ios/build/device/Cordova-Poc.ipa"
+
+    CORDOVA_ANDROID_KEYSTORE_PATH: ""
+    CORDOVA_ANDROID_KEYSTORE_PASSWORD: "<PASSWORD>"
+    CORDOVA_ANDROID_RELEASE_BUILD_PATH: "platforms/android/build/outputs/apk/debug/android-debug.apk"
+
+  ruby:
+    version:
+      2.3.3
+
+general:
+  branches:
+    only:
+    - master
+
+dependencies:
+  pre:
+    #- brew list -1 | while read line; do brew unlink $line; brew link $line; done
+    - brew update
+    #- brew install node && sudo brew postinstall node # node 6.9.1 is already installed  To upgrade to 8.9.2, run `brew upgrade node`
+    - brew install caskroom/cask/brew-cask
+    - brew cask install java
+    - brew cask install android-sdk
+    - sdkmanager "platform-tools" "platforms;android-27"
+    #- brew cask install fastlane
+    - npm install -g cordova ios-deploy ios-sim
+    - gem update fastlane
+    - fastlane add_plugin cordova
+    #- ( sleep 5 && while [ 1 ]; do sleep 1; echo y; done ) | android update sdk --no-ui --all --filter platform-tools,build-tools-27.0.1,android-27
+    # - sdkmanager --update
+
+  override:
+    #- sudo npm cache clean
+    # - sudo npm install -g cordova
+    # - sudo npm install -g bamlab/cordova-deploy
+    - npm install
+    # - ionic state restore
+    # - ionic prepare
+    - sudo sh ./builds/sign-ios.sh
+    #- cordova prepare
+    #- cordova build
+    #- fastlane beta
+
+# deployment:
+#   beta_distribution:
+#     branch: 'master'
+#     commands:
+#       - cordova build android --release
+#       - cordova-deploy --build --android --ios --iosid $HOCKEY_IOS_APP_ID --apikey $HOCKEY_API_KEY --apk ./platforms/android/build/outputs/apk/android-debug.apk --andid  $HOCKEY_ANDROID_APP_ID --notes "Version générée automatiquement par $CIRCLE_USERNAME"
+#       - ruby fastlane/select_xcode_signing_method.rb -p platforms/ios/cordova-poc.xcodeproj -t cordova-poc -m 'Manual' -b $CIRCLE_BUILD_NUM -i platforms/ios/cordova-poc/cordova-poc-Info.plist
+#       - fastlane ios beta
+#       - cp -R ./dist $CIRCLE_ARTIFACTS
