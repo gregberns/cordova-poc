@@ -18,11 +18,12 @@ xcode-select --install
 npm install -g ios-deploy ios-sim
 # Cordova
 npm install -g cordova
+cordova prepare
 ```
 
-## Android
+## Setting up for Android
 
-Accept SDK licenses
+When running with Android you may need to Accept SDK licenses. Use the following command.
 
 ```
 sdkmanager --licenses
@@ -34,7 +35,7 @@ sdkmanager --licenses
 cordova run android
 ```
 
-## iOS
+## Setting up for iOS
 
 Follow the directions in this article:
 
